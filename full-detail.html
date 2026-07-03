@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Full Detail — BackLab</title>
+  <meta name="description" content="Full interior + exterior car detail in Fernandina Beach. $185 — upfront price, no quote needed.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <style>
+    /* ---- Service page: full-bleed, fixed-position layout ---- */
+
+    html, body {
+      height: 100%;
+      overflow: hidden; /* prevent scroll on desktop */
+    }
+
+    /* Full-screen slider is fixed to the viewport */
+    .service-slider {
+      position: fixed;
+      inset: 0;
+      overflow: hidden;
+    }
+
+    /* Top gradient so nav text reads over any photo */
+    .top-grad {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      height: 180px;
+      background: linear-gradient(to bottom, rgba(0,0,0,.52) 0%, transparent 100%);
+      z-index: 5;
+      pointer-events: none;
+    }
+
+    /* Nav overlaid at top */
+    .service-nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 10;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1.5rem 2.5rem;
+    }
+
+    .service-wordmark {
+      font-weight: 900;
+      font-size: 1.1875rem;
+      letter-spacing: -0.02em;
+      text-transform: uppercase;
+      color: white;
+    }
+
+    .service-links {
+      display: flex;
+      align-items: center;
+      gap: 0.375rem;
+      font-family: 'Space Mono', monospace;
+      font-size: 0.5625rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .service-links a       { color: rgba(255,255,255,.6); transition: color 0.15s; }
+    .service-links a:hover { color: white; }
+    .service-links a.active{ color: white; }
+    .service-links a:active { color: rgba(255,255,255,.8); }
+    .service-links a:focus-visible { outline: 2px solid #fff; outline-offset: 3px; border-radius: 2px; }
+    .service-links span    { color: rgba(255,255,255,.35); }
+
+    /* Desktop: keep before/after labels clear of the fixed nav corners */
+    @media (min-width: 768px) {
+      .s-label--before, .s-label--after { top: 5.5rem; }
+    }
+
+    /* Floating card — fixed to viewport bottom-left */
+    .service-card {
+      position: fixed;
+      bottom: 2.5rem;
+      left: 2.5rem;
+      z-index: 10;
+      width: min(360px, calc(100vw - 5rem));
+      background: var(--navy);
+      border-radius: var(--radius);
+      padding: 1.75rem 1.875rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.875rem;
+      box-shadow: 0 8px 40px rgba(0,0,0,.4), 0 2px 8px rgba(0,0,0,.2);
+      animation: card-in 0.4s cubic-bezier(0.22,1,0.36,1) 0.15s both;
+    }
+
+    @keyframes card-in {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .c-label    { font-family: 'Space Mono', monospace; font-size: 0.5rem; letter-spacing: 0.13em; text-transform: uppercase; color: rgba(255,255,255,.4); }
+    .c-price-row{ display: flex; align-items: baseline; gap: 0.75rem; }
+    .c-price    { font-size: clamp(2.5rem, 4.5vw, 3.25rem); font-weight: 900; letter-spacing: -0.03em; color: white; line-height: 1; }
+    .c-note     { font-family: 'Space Mono', monospace; font-size: 0.5625rem; letter-spacing: 0.05em; color: rgba(255,255,255,.38); }
+    .c-divider  { border: none; border-top: 1px solid rgba(255,255,255,.1); }
+    .c-stars    { color: var(--bg); font-size: 0.9375rem; }
+    .c-quote    { font-size: 0.875rem; line-height: 1.65; color: rgba(255,255,255,.78); }
+    .c-attr     { font-family: 'Space Mono', monospace; font-size: 0.475rem; letter-spacing: 0.1em; text-transform: uppercase; color: rgba(255,255,255,.35); }
+
+    /* ---- Mobile: linear stack ---- */
+    @media (max-width: 767px) {
+      html, body { height: auto; overflow: auto; }
+
+      .service-slider {
+        position: relative;
+        height: 64vw;
+        min-height: 280px;
+        overflow: hidden;
+      }
+
+      .top-grad { display: none; }
+
+      .service-nav {
+        position: sticky;
+        top: 0;
+        background: var(--navy);
+        padding: 1rem 1.25rem;
+      }
+
+      .service-card {
+        position: relative;
+        bottom: auto; left: auto;
+        width: 100%;
+        border-radius: 0;
+        padding: 1.5rem 1.25rem 2.5rem;
+        box-shadow: none;
+        animation: none;
+      }
+
+      /* Tighten the three top pills so they clear each other on narrow phones */
+      .s-label { padding: 0.5rem 0.875rem; }
+      .s-hint  { padding: 0.5rem 0.875rem; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Full-screen before/after slider -->
+  <div class="service-slider" data-slider aria-label="Full detail before and after comparison">
+    <img class="s-after"  src="images/after.jpg"  alt="White Corvette after BackLab full detail — showroom finish">
+    <img class="s-before" src="images/before.jpg" alt="White Corvette before full detail — road grime, oxidized wheels">
+    <div class="s-handle">
+      <div class="s-line"></div>
+      <div class="s-knob">‹ ›</div>
+      <div class="s-line"></div>
+    </div>
+    <span class="s-label s-label--before">Before</span>
+    <span class="s-label s-label--after">After</span>
+    <span class="s-hint">Drag to compare</span>
+  </div>
+
+  <!-- Top gradient overlay -->
+  <div class="top-grad" aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <header class="service-nav">
+    <a href="index.html" class="service-wordmark">BackLab</a>
+    <nav class="service-links" aria-label="Services">
+      <a href="index.html#pricing">Pricing</a>
+      <span aria-hidden="true">·</span>
+      <a href="full-detail.html" class="active">Full Detail</a>
+      <span aria-hidden="true">·</span>
+      <a href="exterior.html">Exterior</a>
+    </nav>
+  </header>
+
+  <!-- Floating booking card -->
+  <aside class="service-card" aria-label="Booking">
+    <p class="c-label">////// Full Detail &nbsp;·&nbsp; SUV</p>
+    <div class="c-price-row">
+      <span class="c-price">$185</span>
+      <span class="c-note">upfront — no quote</span>
+    </div>
+    <hr class="c-divider">
+    <p class="c-stars">★★★★★</p>
+    <p class="c-quote">"The car looked brand new — black plastic parts fully restored. He took a small brush to every crevasse and corner. Noah is prompt, professional and detail oriented."</p>
+    <p class="c-attr">Ann Davis &nbsp;·&nbsp; Google Review</p>
+    <a href="https://book.squareup.com/appointments/27x2rtg8x1ynqv/location/LQWPVHAEA41YA/services" class="btn btn-white btn-full" target="_blank" rel="noopener">Book on Square &nbsp;→</a>
+  </aside>
+
+<script src="slider.js"></script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+# Dependencies (regenerate with `npm install`)
+node_modules/
+
+# Local dev / QA artifacts
+temporary screenshots/
+
+# Local Claude Code config (may contain local permissions)
+.claude/
+
+# macOS
+.DS_Store
+**/.DS_Store
