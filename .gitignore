@@ -3,6 +3,7 @@ node_modules/
 
 # Local dev / QA artifacts
 temporary screenshots/
+scratchqa/
 
 # Local Claude Code config (may contain local permissions)
 .claude/
